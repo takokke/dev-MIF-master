@@ -7,65 +7,65 @@ import { KintoneRestAPIClient, KintoneRecordField } from "@kintone/rest-api-clie
 (() => {
    "use strict";
 
-   type MifData = {
-    $id: KintoneRecordField.ID;
-    $revision: KintoneRecordField.Revision;
-    更新者: KintoneRecordField.Modifier;
-    作成者: KintoneRecordField.Creator;
-    レコード番号: KintoneRecordField.RecordNumber;
-    更新日時: KintoneRecordField.UpdatedTime;
-    作成日時: KintoneRecordField.CreatedTime;
-    機種コード下3桁: KintoneRecordField.SingleLineText;
-    区分: KintoneRecordField.SingleLineText;
-    機種コード: KintoneRecordField.SingleLineText;
-    機械区分: KintoneRecordField.Dropdown;
-    営業CD: KintoneRecordField.SingleLineText;
-    DV黒モード: KintoneRecordField.SingleLineText;
-    機種: KintoneRecordField.SingleLineText;
-    シリアルNO下6桁: KintoneRecordField.SingleLineText;
-    MIFID判定: KintoneRecordField.SingleLineText;
-    階数: KintoneRecordField.SingleLineText;
-    設置日: KintoneRecordField.Date;
-    経月: KintoneRecordField.SingleLineText;
-    MIFID採番: KintoneRecordField.SingleLineText;
-    A_MIFID: KintoneRecordField.SingleLineText;
-    保守区分: KintoneRecordField.SingleLineText;
-    シリアルNo: KintoneRecordField.SingleLineText;
-    文字列__1行_: KintoneRecordField.SingleLineText;
-    ふりがな: KintoneRecordField.SingleLineText;
-    A_顧客名: KintoneRecordField.SingleLineText;
-    最終更新日: KintoneRecordField.SingleLineText;
-    担当CE: KintoneRecordField.SingleLineText;
-    CECD: KintoneRecordField.SingleLineText;
-    経過基準日: KintoneRecordField.Date;
-    A_事業所ID: KintoneRecordField.SingleLineText;
-    採番: KintoneRecordField.SingleLineText;
-    部署名: KintoneRecordField.SingleLineText;
-    DV平均: KintoneRecordField.SingleLineText;
-    DVカラー: KintoneRecordField.SingleLineText;
-    FB業務委託区分: KintoneRecordField.SingleLineText;
-    契約満了日: KintoneRecordField.SingleLineText;
-    設置日＿BK: KintoneRecordField.SingleLineText;
-    担当営業: KintoneRecordField.SingleLineText;
-    撤収日: KintoneRecordField.SingleLineText;
-    提案対象MIF区分: KintoneRecordField.Calc;
-    UTMウオッチガード数: KintoneRecordField.Calc;
-    設置年: KintoneRecordField.Calc;
-    経過月: KintoneRecordField.Calc;
-    RISOリングラフ数: KintoneRecordField.Calc;
-    基準年: KintoneRecordField.Calc;
-    RISOオルフィス数: KintoneRecordField.Calc;
-    設置月: KintoneRecordField.Calc;
-    数量: KintoneRecordField.Calc;
-    NAS数: KintoneRecordField.Calc;
-    FBMIF件数: KintoneRecordField.Calc;
-    セレゾナ数: KintoneRecordField.Calc;
-    FB複合機数: KintoneRecordField.Calc;
-    基準月: KintoneRecordField.Calc;
-    Canon大判機数: KintoneRecordField.Calc;
-    UTMウオッチポイント数: KintoneRecordField.Calc;
-    FBプリンタ数: KintoneRecordField.Calc;
-}
+    type MifData = {
+        $id: KintoneRecordField.ID;
+        $revision: KintoneRecordField.Revision;
+        更新者: KintoneRecordField.Modifier;
+        作成者: KintoneRecordField.Creator;
+        レコード番号: KintoneRecordField.RecordNumber;
+        更新日時: KintoneRecordField.UpdatedTime;
+        作成日時: KintoneRecordField.CreatedTime;
+        機種コード下3桁: KintoneRecordField.SingleLineText;
+        区分: KintoneRecordField.SingleLineText;
+        機種コード: KintoneRecordField.SingleLineText;
+        機械区分: KintoneRecordField.Dropdown;
+        営業CD: KintoneRecordField.SingleLineText;
+        DV黒モード: KintoneRecordField.SingleLineText;
+        機種: KintoneRecordField.SingleLineText;
+        シリアルNO下6桁: KintoneRecordField.SingleLineText;
+        MIFID判定: KintoneRecordField.SingleLineText;
+        階数: KintoneRecordField.SingleLineText;
+        設置日: KintoneRecordField.Date;
+        経月: KintoneRecordField.SingleLineText;
+        MIFID採番: KintoneRecordField.SingleLineText;
+        A_MIFID: KintoneRecordField.SingleLineText;
+        保守区分: KintoneRecordField.SingleLineText;
+        シリアルNo: KintoneRecordField.SingleLineText;
+        文字列__1行_: KintoneRecordField.SingleLineText;
+        ふりがな: KintoneRecordField.SingleLineText;
+        A_顧客名: KintoneRecordField.SingleLineText;
+        最終更新日: KintoneRecordField.SingleLineText;
+        担当CE: KintoneRecordField.SingleLineText;
+        CECD: KintoneRecordField.SingleLineText;
+        経過基準日: KintoneRecordField.Date;
+        A_事業所ID: KintoneRecordField.SingleLineText;
+        採番: KintoneRecordField.SingleLineText;
+        部署名: KintoneRecordField.SingleLineText;
+        DV平均: KintoneRecordField.SingleLineText;
+        DVカラー: KintoneRecordField.SingleLineText;
+        FB業務委託区分: KintoneRecordField.SingleLineText;
+        契約満了日: KintoneRecordField.SingleLineText;
+        設置日＿BK: KintoneRecordField.SingleLineText;
+        担当営業: KintoneRecordField.SingleLineText;
+        撤収日: KintoneRecordField.SingleLineText;
+        提案対象MIF区分: KintoneRecordField.Calc;
+        UTMウオッチガード数: KintoneRecordField.Calc;
+        設置年: KintoneRecordField.Calc;
+        経過月: KintoneRecordField.Calc;
+        RISOリングラフ数: KintoneRecordField.Calc;
+        基準年: KintoneRecordField.Calc;
+        RISOオルフィス数: KintoneRecordField.Calc;
+        設置月: KintoneRecordField.Calc;
+        数量: KintoneRecordField.Calc;
+        NAS数: KintoneRecordField.Calc;
+        FBMIF件数: KintoneRecordField.Calc;
+        セレゾナ数: KintoneRecordField.Calc;
+        FB複合機数: KintoneRecordField.Calc;
+        基準月: KintoneRecordField.Calc;
+        Canon大判機数: KintoneRecordField.Calc;
+        UTMウオッチポイント数: KintoneRecordField.Calc;
+        FBプリンタ数: KintoneRecordField.Calc;
+    }
 
     type FBData = {
         $id: KintoneRecordField.ID;
@@ -172,29 +172,30 @@ import { KintoneRestAPIClient, KintoneRecordField } from "@kintone/rest-api-clie
 
                     const getMifMasterParams = {
                         app: APP_ID,
-                        condition: '経過月 >= 48 and A_事業所ID != ""'
+                        query: '経過月 >= 48 and A_事業所ID != ""'
                     };
                     
                     // MIFマスタレコードの取得
-                    const mifMaster: MifData[] = await client.record.getAllRecords(getMifMasterParams);
-                    
+                    const mifMasterResp = await client.record.getRecords<MifData>(getMifMasterParams);
                     
                     const getFbParams = {
-                        app: FB_APP_ID
+                        app: FB_APP_ID,
+                        query: '台数 >= 1'
                     };
                     
                     // FB商談アプリの情報を取得
                     // ここでFBレコードの型をつけたい
-                    const fbRecords: FBData[] = await client.record.getAllRecords(getFbParams);
+                    const fbRecords = await client.record.getRecords<FBData>(getFbParams);
+
+                    console.log(fbRecords.records)
                     
-                    const updateRecords: any = await fbRecords.map((fbRecord) => {
+                    const updateRecords: any = await fbRecords.records.map((fbRecord) => {
                          // MIFマスタのレコードと一致するA_事業所IDがあるかどうかを確認
                        
                          // filter( callbackfn )を使い配列で取得する。
-                        const matchingMifMasterRecords = mifMaster.filter((mif) => {
+                        const matchingMifMasterRecords = mifMasterResp.records.filter((mif) => {
                              return mif.A_事業所ID.value === fbRecord.A_事業所ID.value
                         });
-
 
                         if (matchingMifMasterRecords.length !== 0) {
                             // matchingMifMasterRecordsをテーブルに追加できるように形を変える。
