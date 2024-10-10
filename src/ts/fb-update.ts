@@ -176,24 +176,39 @@ import { KintoneRestAPIClient, KintoneRecordField } from "@kintone/rest-api-clie
                     };
                     
                     // MIFマスタレコードの取得
-                    const mifMasterResp = await client.record.getRecords<MifData>(getMifMasterParams);
+                    const mifMaster48Resp = await client.record.getRecords<MifData>(getMifMasterParams);
                     
+                    // FB商談において台数１台以上のレコードに対する操作。
+                    // MIF情報サブテーブルの更新。または、削除
+
+                    // FB商談において台数0台、かつ事業所_IDがMIF情報にも存在するレコードに対しての操作
+                    // 経過月=48ヶ月のMIFマスタのレコードがあれば、MIF情報に追加。
+
+                    // そもそもここで、事業所IDがMIFに存在するか知りたい。
                     const getFbParams = {
                         app: FB_APP_ID,
-                        query: '台数 >= 1'
+                        // query: '台数 >= 1'
                     };
                     
                     // FB商談アプリの情報を取得
                     // ここでFBレコードの型をつけたい
-                    const fbRecords = await client.record.getRecords<FBData>(getFbParams);
+                    // const fbRecords = await client.record.getRecords<FBData>(getFbParams);
+                    const startTime1 = performance.now();  // 開始時間を取得
 
-                    console.log(fbRecords.records)
+                    const fbRecords: FBData[] = await client.record.getAllRecords(getFbParams);
+
+                    const endTime1 = performance.now();    // 終了時間を取得
+                    const elapsedTime = endTime1 - startTime1;  // 経過時間をミリ秒で計算
+
+                    console.log("FB商談全レコード取得");
+
+                    console.log(`取得の処理時間: ${elapsedTime} ms`);
                     
-                    const updateRecords: any = await fbRecords.records.map((fbRecord) => {
+                    const updateRecords: any = fbRecords.map((fbRecord) => {
                          // MIFマスタのレコードと一致するA_事業所IDがあるかどうかを確認
                        
                          // filter( callbackfn )を使い配列で取得する。
-                        const matchingMifMasterRecords = mifMasterResp.records.filter((mif) => {
+                        const matchingMifMasterRecords = mifMaster48Resp.records.filter((mif) => {
                              return mif.A_事業所ID.value === fbRecord.A_事業所ID.value
                         });
 
@@ -239,6 +254,7 @@ import { KintoneRestAPIClient, KintoneRecordField } from "@kintone/rest-api-clie
                                     }
                                 )
                             })
+                            // updateRecordsにリターンする
                             return {
                                 id: fbRecord.$id.value,
                                 record: {
@@ -295,12 +311,21 @@ import { KintoneRestAPIClient, KintoneRecordField } from "@kintone/rest-api-clie
 
                     })
                     
+                    // FB商談において台数0台、かつ事業所_IDがMIF情報にも存在するレコードに対しての操作
+                    // 経過月=48ヶ月のMIFマスタのレコードがあれば、MIF情報に追加。
+
+                    // まず、mifMaster48Resp.recordで繰り返し処理。
+
                     const mifUpdateParams = {
                         app: FB_APP_ID,
                         records: updateRecords
                     };
-                    
+                    const startTime2 = performance.now();  // 開始時間を取得
                     await client.record.updateAllRecords(mifUpdateParams);
+                    const endTime2 = performance.now();  // 開始時間を取得
+                    const elapsedTime2 = endTime2-startTime2;
+                    console.log("更新完了")
+                    console.log(`更新の処理時間: ${elapsedTime2} ms`);
                     alert("MIF情報の更新完了");
                     location.reload()
                 } catch (err: any) {
