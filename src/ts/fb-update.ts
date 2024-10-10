@@ -252,7 +252,42 @@ import { KintoneRestAPIClient, KintoneRecordField } from "@kintone/rest-api-clie
                                 id: fbRecord.$id.value,
                                 record: {
                                     'MIF情報': {
-                                        value: [] // サブテーブルをクリア
+                                        value: [
+                                            { 
+                                                value: {
+                                                    FB業務委託区分: {
+                                                        value: ""
+                                                    },
+                                                    機種: {
+                                                        value: ""
+                                                    },
+                                                    設置日: {
+                                                        value: ""
+                                                    },
+                                                    担当営業: {
+                                                        value: ""
+                                                    },
+                                                    MIF数量: {
+                                                        value: ""
+                                                    },
+                                                    区分: {
+                                                        value: ""
+                                                    },
+                                                    A_MIFID: {
+                                                        value: ""
+                                                    },
+                                                    担当CE: {
+                                                        value: ""
+                                                    },
+                                                    シリアルNo: {
+                                                        value: ""
+                                                    },
+                                                    経過月: {
+                                                        value: ""
+                                                    }
+                                                }   
+                                            }
+                                        ] // サブテーブルをクリア
                                     }
                                 }
                             };                         
